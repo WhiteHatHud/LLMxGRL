@@ -1,0 +1,65 @@
+API Usage
+Create a graph:
+bash
+
+curl -X POST http://localhost:8000/graphs \
+  -H "Content-Type: application/json" \
+  -d '{"name": "Test Graph", "description": "Sample graph for testing"}'
+Upload graph data:
+bash
+
+curl -X POST http://localhost:8000/graphs/graph_200301e2-bb5/upload \
+  -F "edges_file=@sample_data/edges.csv" \
+  -F "nodes_file=@sample_data/nodes.csv" \
+  -F "node_text_file=@sample_data/node_text.csv"
+
+  //testing - take note of sample data
+ curl -X POST http://localhost:8000/graphs/graph_dd558f4a-e71/upload \
+  -F "edges_file=@sample_data/edges.csv" \
+  -F "nodes_file=@sample_data/nodes.csv" \
+  -F "nodes_text_file=@sample_data/node_text.csv"
+{"graph_id":"graph_dd558f4a-e71","nodes_count":5,"edges_count":6,"texts_count":0,"artifacts":["data/uploads/graph_dd558f4a-e71_edges.csv","data/uploads/graph_dd558f4a-e71_nodes.csv"]}%        
+
+Create a run:
+bash
+
+curl -X POST http://localhost:8000/runs \
+  -H "Content-Type: application/json" \
+  -d '{"graph_id": "graph_200301e2-bb5", "task_type": "QA"}'
+
+//testing:
+(.venv) ➜  backend git:(Setup) ✗ curl -X POST http://localhost:8000/runs \
+  -H "Content-Type: application/json" \
+  -d '{"graph_id": "graph_dd558f4a-e71", "task_type": "QA"}'
+{"run_id":"run_20250908_140525_9232410e","timestamp":"2025-09-08T06:05:25","graph_id":"graph_dd558f4a-e71","task_type":"QA","status":"CREATED"}%    
+
+Run pipeline stages:
+bash
+
+# UniGraph normalization
+curl -X POST http://localhost:8000/pipeline/run_20250908_143328_9bad5888/unigraph
+
+# GNN adapter
+curl -X POST http://localhost:8000/pipeline/run_20250908_143328_9bad5888/gnn-adapter
+
+# GraphTranslator
+curl -X POST http://localhost:8000/pipeline/run_20250908_143328_9bad5888/translator
+
+# Prepare RAG
+curl -X POST http://localhost:8000/pipeline/run_20250908_143328_9bad5888/rag/prepare
+Query the system:
+bash
+
+curl -X POST http://localhost:8000/query/run_20250908_143328_9bad5888 \
+  -H "Content-Type: application/json" \
+  -d '{"query_text": "What is this graph about?", "top_k": 5, "hops": 2}'
+Export results:
+bash
+
+# CSV export
+curl http://localhost:8000/results/run_20250908_143328_9bad5888/export.csv -o results.csv
+
+# Generate charts
+curl -X POST http://localhost:8000/results/run_20250908_143328_9bad5888/charts \
+  -H "Content-Type: application/json" \
+  -d '{"charts": ["acc_vs_k", "tokens_vs_context"]}'
