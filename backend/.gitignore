@@ -1,0 +1,54 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+
+# VS Code
+.vscode/
+
+# macOS
+.DS_Store
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Logs
+*.log
+
+# Test outputs
+htmlcov/
+.coverage
+coverage.xml
+
+# Build
+build/
+dist/
+*.egg-info/
+
+# Data
+uploads/
+outputs/
+
+# Environment
+.env
+.env.*
+
+# Misc
+*.sqlite3
+*.db
+*.bak
+*.swp
+*.swo
+
+# Docker
+*.pid
+
+# Ignore outputs in data/
+data/outputs/
