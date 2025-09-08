@@ -3,8 +3,9 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
 import logging
-
+from dotenv import load_dotenv
 from core.config import settings
+import os, reprlib
 from db.database import engine, Base
 from db.init_db import init_db
 from routers import health, runs, graphs, pipeline, query, results
@@ -12,10 +13,23 @@ from routers import health, runs, graphs, pipeline, query, results
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # Startup
     logger.info("Starting up GraphLLM Backend...")
+    load_dotenv()
+    os.environ["OPENAI_API_KEY"] = os.getenv("LLM_API_KEY", "")
+    os.environ["OPENAI_BASE_URL"] = os.getenv("LLM_ENDPOINT_BASE", "https://api.openai.com/v1")
+    # Print critical LLM environment variables for debugging
+    base = os.getenv("LLM_ENDPOINT_BASE", "").strip()
+    provider = os.getenv("LLM_PROVIDER", "").strip()
+    key_present = bool(os.getenv("LLM_API_KEY", "").strip())
+    model = os.getenv("LLM_MODEL", "").strip()
+    print("[LLM CHECK] Provider:", repr(provider))
+    print("[LLM CHECK] Endpoint:", repr(base))
+    print("[LLM CHECK] API Key present:", key_present)
+    print("[LLM CHECK] Model:", repr(model))
     Base.metadata.create_all(bind=engine)
     init_db()
     yield

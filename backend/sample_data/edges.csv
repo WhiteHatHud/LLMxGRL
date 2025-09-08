@@ -1,0 +1,7 @@
+src,dst,relation
+alice,bob,knows
+bob,charlie,works_with
+charlie,diana,manages
+diana,eve,mentors
+alice,charlie,collaborates
+bob,diana,reports_to

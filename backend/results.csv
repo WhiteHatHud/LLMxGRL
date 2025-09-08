@@ -1,0 +1,10 @@
+run_id,query_id,query_text,k,hops,tokens_in_context,llm_answer,total_tokens,est_cost_usd
+run_20250908_143328_9bad5888,query_20250908_143819_260f83d8,What is this graph about?,5,2,219,"The graph represents a professional network of individuals with expertise in software engineering, machine learning, and data science. It illustrates relationships among several key figures: 
+
+- **Alice (Node ID: alice)** is a senior software engineer, indicating a focus on technical skills in distributed systems and cloud architecture.
+- **Bob (Node ID: bob)** is a data scientist with a specialization in graph neural networks and recommendation systems, suggesting a strong analytical background.
+- **Charlie (Node ID: charlie)** leads the machine learning team, showcasing expertise in computer vision and natural language processing (NLP).
+- **Diana (Node ID: diana)** serves as the engineering director, overseeing various teams, which indicates a leadership role in technology management.
+- **Eve (Node ID: eve)** is an intern, indicating early career development in graph databases and knowledge representation.
+
+The paths connecting these individuals suggest collaboration and mentorship relationships, particularly between more experienced professionals (like Diana and Charlie) and the intern (Eve). Overall, the graph highlights a network of expertise and collaboration in technology and data science.",495,0.002139
