@@ -1,0 +1,14 @@
+# pyproject.toml
+[project]
+name = "graphllm-backend"
+version = "0.1.0"
+description = "Backend for LLM × Graph Representation Learning experiments"
+requires-python = ">=3.10"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.mypy]
+python_version = "3.10"
+ignore_missing_imports = true
