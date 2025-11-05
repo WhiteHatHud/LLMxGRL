@@ -1,0 +1,42 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+*.egg-info/
+dist/
+build/
+
+# Data
+data/
+*.jsonl
+*.json.gz
+*.npy
+*.pickle
+
+# Outputs
+outputs/*.jsonl
+outputs/*.txt
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# NLTK data
+nltk_data/
+
+# Temp files
+*.tmp
+*.bak
