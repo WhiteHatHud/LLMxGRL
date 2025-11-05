@@ -26,6 +26,7 @@ import json
 import sqlite3
 import traceback
 import argparse
+import re
 from tqdm import tqdm
 from itertools import product
 from collections import defaultdict
@@ -446,6 +447,32 @@ def isValidSQL(sql, db):
     return True
 
 
+def clean_sql_prediction(prediction):
+    """Clean SQL prediction by removing markdown code blocks and extra formatting"""
+    # Remove markdown code blocks (```sqlite, ```sql, ```)
+    sql = re.sub(r'```\s*(?:sqlite|sql)?\s*', '', prediction)
+    sql = re.sub(r'```', '', sql)
+
+    # Remove newlines
+    sql = sql.replace('\n', ' ')
+
+    # Normalize whitespace
+    sql = ' '.join(sql.split())
+
+    # Remove trailing semicolons
+    sql = sql.rstrip(';')
+
+    # Ensure it starts with SELECT (case-insensitive)
+    sql = sql.strip()
+    if not sql.upper().startswith('SELECT'):
+        sql = 'SELECT ' + sql
+
+    # Fix double SELECT
+    sql = re.sub(r'\bSELECT\s+SELECT\b', 'SELECT', sql, flags=re.IGNORECASE)
+
+    return sql.strip()
+
+
 def print_scores(scores, etype):
     levels = ['easy', 'medium', 'hard', 'extra', 'all']
     partial_types = ['select', 'select(no AGG)', 'where', 'where(no OP)', 'group(no Having)',
@@ -488,9 +515,8 @@ def evaluate(path, db_dir, etype, kmaps, db_dir2):
     plist = []
     for item in all_data:
         glist.append((item['query'] + '\t' + item['db_id']).strip().split('\t'))
-        result_query = 'SELECT ' + item['Prediction'].replace('\n', ' ')
-        result_query = result_query.replace('SELECT SELECT', 'SELECT')
-        plist.append(result_query.strip())
+        result_query = clean_sql_prediction(item['Prediction'])
+        plist.append(result_query)
 
     evaluator = Evaluator()
 
