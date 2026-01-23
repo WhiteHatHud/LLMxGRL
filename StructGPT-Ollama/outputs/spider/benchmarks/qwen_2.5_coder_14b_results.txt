@@ -1,0 +1,24 @@
+===========================================
+QWEN 2.5 CODER 14B BENCHMARK RESULTS
+===========================================
+Model: qwen/qwen2.5-coder-14b
+Test Date: 2026-01-13
+Total Samples: 100
+===========================================
+
+TIMING METRICS:
+- Total Execution Time: 1 hour 24 minutes 3 seconds (5,043 seconds)
+- Average Time per Sample: 50.43 seconds
+- Min Time per Sample: ~28.84 seconds (sample 2)
+- Max Time per Sample: ~65.03 seconds (sample 85)
+
+FILES GENERATED:
+- Output: outputs/spider/output_sample_qwen.jsonl (148 KB)
+- Chat Log: outputs/spider/chat_sample_qwen.txt (275 KB)
+- Samples Completed: 100/100 (100% success rate)
+
+SAMPLE OUTPUT:
+Question: "How many singers do we have?"
+Generated SQL: SELECT count(*) FROM singer
+
+===========================================

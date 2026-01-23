@@ -1,0 +1,25 @@
+===========================================
+DEEPSEEK R1 QWEN3 8B BENCHMARK RESULTS
+===========================================
+Model: deepseek/deepseek-r1-0528-qwen3-8b
+Test Date: 2026-01-13
+Total Samples: 100
+===========================================
+
+TIMING METRICS:
+- Total Execution Time: 32 minutes 12 seconds (1,932 seconds)
+- Average Time per Sample: 19.32 seconds
+- Min Time per Sample: ~16.20 seconds (sample 4)
+- Max Time per Sample: ~20.12 seconds (sample 33)
+
+FILES GENERATED:
+- Output: outputs/spider/output_sample_deepseek.jsonl (254 KB)
+- Chat Log: outputs/spider/chat_sample_deepseek.txt (568 KB)
+- Samples Completed: 100/100 (100% success rate)
+
+NOTES:
+- DeepSeek R1 generates more verbose reasoning in responses
+- Chat log is 2x larger than Qwen due to detailed explanations
+- Output JSONL is 1.7x larger than Qwen (more detailed SQL)
+
+===========================================

@@ -1,0 +1,106 @@
+=============================================================================
+MODEL COMPARISON REPORT - SPIDER DATASET (100 SAMPLES)
+=============================================================================
+Test Date: 2026-01-13
+Environment: LM Studio on localhost:1234
+Dataset: Spider SQL Generation (100 samples)
+=============================================================================
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│ MODEL SPECIFICATIONS                                                    │
+└─────────────────────────────────────────────────────────────────────────┘
+
+Model 1: Qwen 2.5 Coder 14B
+- Full ID: qwen/qwen2.5-coder-14b
+- Parameters: 14 Billion
+- Specialization: Code generation and understanding
+
+Model 2: DeepSeek R1 Qwen3 8B  
+- Full ID: deepseek/deepseek-r1-0528-qwen3-8b
+- Parameters: 8 Billion
+- Specialization: Reasoning-focused with chain-of-thought
+
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│ PERFORMANCE METRICS                                                     │
+└─────────────────────────────────────────────────────────────────────────┘
+
+Metric                          Qwen 2.5 Coder    DeepSeek R1      Winner
+─────────────────────────────────────────────────────────────────────────
+Total Execution Time            84m 3s            32m 12s          DeepSeek (2.6x faster)
+                                (5,043 sec)       (1,932 sec)      
+Average Time per Sample         50.43 seconds     19.32 seconds    DeepSeek (2.6x faster)
+Min Time per Sample             28.84 seconds     16.20 seconds    DeepSeek
+Max Time per Sample             65.03 seconds     20.12 seconds    DeepSeek
+Samples Completed               100/100           100/100          TIE
+Success Rate                    100%              100%             TIE
+
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│ OUTPUT FILE SIZES                                                       │
+└─────────────────────────────────────────────────────────────────────────┘
+
+File Type                       Qwen 2.5 Coder    DeepSeek R1      
+─────────────────────────────────────────────────────────────────────────
+Output JSONL                    148 KB            254 KB           (+72% larger)
+Chat Log                        275 KB            568 KB           (+107% larger)
+
+Note: DeepSeek R1 produces more verbose outputs with detailed reasoning,
+resulting in larger file sizes despite faster execution.
+
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│ KEY FINDINGS                                                            │
+└─────────────────────────────────────────────────────────────────────────┘
+
+Speed Champion: DeepSeek R1
+- 2.6x faster execution (32 min vs 84 min)
+- Significantly faster per-sample processing (19s vs 50s)
+- More consistent timing (lower variance)
+
+Output Characteristics:
+- Qwen: Concise SQL generation, minimal explanation
+- DeepSeek: Verbose reasoning with chain-of-thought approach
+- Both achieved 100% completion rate
+
+File Size Trade-off:
+- DeepSeek outputs are 72-107% larger
+- Due to reasoning traces and detailed explanations
+- May impact storage if processing large datasets
+
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│ RECOMMENDATIONS                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+
+Choose Qwen 2.5 Coder 14B when:
+  ✓ You need concise, direct SQL generation
+  ✓ Minimal output size is important
+  ✓ Explanation/reasoning is not required
+  ✓ Working with larger models is acceptable
+
+Choose DeepSeek R1 Qwen3 8B when:
+  ✓ Speed is critical (2.6x faster)
+  ✓ You want detailed reasoning and explanations
+  ✓ Chain-of-thought analysis is valuable
+  ✓ Smaller model size is preferred (8B vs 14B)
+  ✓ Processing large batches quickly
+
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│ CONCLUSION                                                              │
+└─────────────────────────────────────────────────────────────────────────┘
+
+DeepSeek R1 demonstrates superior performance for this SQL generation task:
+- 2.6x faster processing time
+- Smaller model (8B vs 14B parameters)
+- Maintains 100% success rate
+- Provides additional reasoning context
+
+The trade-off is larger output files due to verbose explanations, which may
+or may not be desirable depending on your use case.
+
+=============================================================================
+Generated: 2026-01-13
+Location: outputs/spider/benchmarks/
+=============================================================================
