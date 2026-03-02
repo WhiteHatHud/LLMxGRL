@@ -41,7 +41,7 @@ class LLMClient:
         model = params.get("model", self.model)
         
         # Prepare request based on provider
-        if self.provider in ["openrouter", "openai"]:
+        if self.provider in ["openrouter", "openai", "lmstudio"]:
             url = f"{self.endpoint_base}/chat/completions"
             headers = {
                 "Authorization": f"Bearer {self.api_key}",
@@ -83,7 +83,7 @@ class LLMClient:
                 logger.debug(f"Response data: {json.dumps(data, indent=2)[:500]}...")
             
             # Parse response based on provider
-            if self.provider in ["openrouter", "openai"]:
+            if self.provider in ["openrouter", "openai", "lmstudio"]:
                 answer_text = data["choices"][0]["message"]["content"]
                 usage = data.get("usage", {})
                 prompt_tokens = usage.get("prompt_tokens", estimate_tokens(prompt))

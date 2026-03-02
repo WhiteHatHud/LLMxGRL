@@ -14,7 +14,7 @@ import requests
 LMSTUDIO_API_BASE = "http://localhost:1234/v1"
 LMSTUDIO_MODEL = "qwen/qwen2.5-coder-14b"
 
-random.seed(42)
+random.seed()  # No fixed seed — use system entropy for non-deterministic sampling
 
 
 class ChatGPT:
