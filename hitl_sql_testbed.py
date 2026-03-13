@@ -5,7 +5,7 @@ HITL SQL Generation Testbed
 Human-in-the-Loop SQL generation using a Create-Verify-Refine loop.
 
   AI_Agent    : Qwen 2.5 Coder (LM Studio) — translates NL → SQL
-  Human_Proxy : DeepSeek R1 (LM Studio) OR Claude 3.5 (Anthropic) — Oracle simulator
+  Human_Proxy : Qwen 2.5 Coder (LM Studio) OR Claude 3.5 (Anthropic) — Oracle simulator
 
 Usage — compare against the 250-sample baseline
 ------------------------------------------------
@@ -41,7 +41,7 @@ import requests
 LMSTUDIO_BASE = "http://localhost:1234/v1"
 
 AI_AGENT_MODEL    = "qwen/qwen2.5-coder-14b"
-HUMAN_PROXY_MODEL = "deepseek/deepseek-r1-0528-qwen3-8b"
+HUMAN_PROXY_MODEL = "qwen/qwen2.5-coder-14b"
 
 # Switch to "anthropic" to use Claude 3.5 as Human_Proxy
 # Requires: pip install anthropic && export ANTHROPIC_API_KEY=sk-ant-...
@@ -49,7 +49,7 @@ HUMAN_PROXY_PROVIDER = "lmstudio"   # "lmstudio" | "anthropic"
 ANTHROPIC_MODEL      = "claude-3-5-sonnet-20241022"
 
 MAX_ITERATIONS  = 3
-REQUEST_TIMEOUT = 180   # seconds — DeepSeek R1 can be slow
+REQUEST_TIMEOUT = 180   # seconds
 
 BASELINE_ACCURACY = 0.84   # 84% — used in the final comparison report
 
