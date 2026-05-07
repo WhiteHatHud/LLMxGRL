@@ -1,0 +1,2 @@
+#!/bin/bash
+venv/bin/python graph_hitl_framework/graph_hitl_pipeline.py --answer_key answer_key.json --baseline hitl_results.json --embeddings graph_hitl_framework/cache/schema_embeddings.pkl --router_model graph_hitl_framework/cache/grl_router_model.pkl --tables StructGPT-Ollama/data/spider/spider_data/tables.json --db_dir StructGPT-Ollama/data/spider/spider_data/database --output graph_hitl_framework/ablation_results.json "$@"
